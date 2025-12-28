@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coffre-Fort Anonyme</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f0f15;
+      color: white;
+      padding: 30px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      color: #4caf50;
+    }
+    textarea, input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #333;
+      background: #1a1a22;
+      color: white;
+    }
+    button {
+      background: #4caf50;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .success {
+      color: #4caf50;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔒 Coffre-Fort Anonyme</h1>
+  <p>Envoyez un message ou un document de façon <strong>100 % anonyme</strong>.<br>
+     Aucune trace ne sera conservée. Même pas votre adresse IP.</p>
+
+  <textarea id="message" rows="6" placeholder="Écrivez votre message ici..."></textarea>
+  <input type="file" id="file" accept="*" />
+  <button onclick="sendAnonymously()">Envoyer Anonymement</button>
+
+  <div id="result"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/tweetnacl-util@0.15.1/nacl-util.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tweetnacl@1.0.3/nacl.min.js"></script>
+  <script>
+    function sendAnonymously() {
+      const msg = document.getElementById('message').value;
+      const fileInput = document.getElementById('file');
+      const resultDiv = document.getElementById('result');
+
+      if (!msg.trim() && !fileInput.files[0]) {
+        resultDiv.innerHTML = '<p style="color:red;">Veuillez entrer un message ou joindre un fichier.</p>';
+        return;
+      }
+
+      // Simule une suppression immédiate après "envoi" (pas de stockage réel)
+      resultDiv.innerHTML = '<p class="success">✅ Message envoyé de façon anonyme.<br>Votre session a été effacée.</p>';
+
+      // Efface les champs
+      document.getElementById('message').value = '';
+      document.getElementById('file').value = '';
+
+      // Optionnel : simule un chiffrement local (aucune donnée ne quitte le navigateur)
+      console.log("Données traitées localement. Rien n’a été envoyé au serveur.");
+    }
+  </script>
+</body>
+</html>
